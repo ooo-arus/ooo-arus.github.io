@@ -39,8 +39,9 @@
         }
         @media (max-width: 768px) {
             header img {
-                width: 50%;
+                width: 100%;
                 height: auto;
+                max-width: 600px; /* Увеличен размер логотипа */
             }
             .services {
                 display: block;
@@ -50,7 +51,7 @@
             .services .service {
                 font-size: 1.2em;
                 text-align: center;
-                margin-bottom: 5px;  /* уменьшил отступы */
+                margin-bottom: 5px;  /* уменьшены отступы */
             }
             .services .service img {
                 width: 20px;
@@ -63,6 +64,12 @@
             .contact {
                 font-size: 1em;
                 margin-top: 10px;
+            }
+            .services .service p {
+                margin-bottom: 0; /* Уменьшены отступы */
+            }
+            .contact p {
+                margin-bottom: 5px; /* Уменьшены отступы между контактами */
             }
         }
         .content {
