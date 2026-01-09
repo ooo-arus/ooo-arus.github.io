@@ -33,14 +33,33 @@
         }
         header img {
             border-radius: 50%;
-            width: 500px;
-            height: 500px;
+            width: 300px;
+            height: 300px;
             object-fit: cover;
         }
         @media (max-width: 768px) {
             header img {
                 width: 50%;
                 height: auto;
+            }
+            .services {
+                flex-direction: column;
+                align-items: center;
+            }
+            .services .service {
+                font-size: 1.1em;
+                text-align: center;
+            }
+            .certificates a {
+                font-size: 1em;
+                padding: 8px 12px;
+            }
+            .links a {
+                font-size: 1em;
+                padding: 8px 12px;
+            }
+            .contact {
+                font-size: 1em;
             }
         }
         .content {
@@ -103,12 +122,15 @@
             justify-content: center;
             gap: 10px;
         }
+        .bold {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="path_to_your_logo_image.jpg" alt="Логотип ООО Арус">
+            <img src="logo.png" alt="ООО Арус">
         </header>
         <div class="content">
             <section class="about">
@@ -155,9 +177,9 @@
             </section>
             <section class="contact">
                 <h2>Контакты</h2>
-                <p>Email: aro2025@yandex.ru</p>
-                <p>Телефон: 8 918 144 61 86 (Марина)</p>
-                <p>Мессенджеры: Max | <a href="https://t.me/contact/1767958335:Tu57DPUgV3M12_-z" target="_blank">Telegram</a></p>
+                <p><span class="bold">Email:</span> aro2025@yandex.ru</p>
+                <p><span class="bold">Телефон:</span> 8 918 144 61 86 (Марина)</p>
+                <p><span class="bold">Мессенджеры:</span> <a href="https://max.ru/u/f9LHodD0cOJlNtCMEsLKJuY6_fljldfUFTGYXLqT8PPhI1Fxme4KttCBdz0" target="_blank">Max</a> | <a href="https://t.me/contact/1767958335:Tu57DPUgV3M12_-z" target="_blank">Telegram</a></p>
             </section>
         </div>
     </div>
