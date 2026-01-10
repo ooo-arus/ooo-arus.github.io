@@ -1,198 +1,352 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ООО Арус</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 20px;
-            text-align: center;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-        }
-        header img {
-            border-radius: 50%;
-            width: 300px;
-            height: 300px;
-            object-fit: cover;
-        }
-        @media (max-width: 768px) {
-            header img {
-                width: 100%;
-                height: auto;
-                max-width: 600px; /* Увеличен размер логотипа */
-            }
-            .services {
-                display: block;
-                margin: 0;
-                padding: 0;
-            }
-            .services .service {
-                font-size: 1.2em;
-                text-align: center;
-                margin-bottom: 5px;  /* уменьшены отступы */
-            }
-            .services .service img {
-                width: 20px;
-                height: 20px;
-            }
-            .certificates a, .links a {
-                font-size: 1em;
-                padding: 8px 12px;
-            }
-            .contact {
-                font-size: 1em;
-                margin-top: 10px;
-            }
-            .services .service p {
-                margin-bottom: 0; /* Уменьшены отступы */
-            }
-            .contact p {
-                margin-bottom: 1px; /* Уменьшены отступы между контактами */
-            }
-        }
-        .content {
-            padding: 20px;
-        }
-        .certificates a {
-            display: inline-block;
-            background-color: #28a745;
-            color: white;
-            padding: 12px 20px;
-            margin: 10px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .certificates a:hover {
-            background-color: #218838;
-        }
-        .links a {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 12px 20px;
-            margin: 10px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-        .links a:hover {
-            transform: scale(1.1);
-            background-color: #0056b3;
-        }
-        .contact {
-            font-size: 1.2em;
-            margin-top: 30px;
-        }
-        .services {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 30px 0;
-        }
-        .services .service {
-            display: flex;
-            align-items: center;
-            font-size: 1.2em;
-            text-transform: uppercase;
-            font-weight: bold;
-            gap: 10px;
-        }
-        .services .service img {
-            width: 24px;
-            height: 24px;
-        }
-        .messengers {
-            font-size: 1.2em;
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-        .bold {
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ООО Арус</title>
+
+  <!-- Красивый, но строгий шрифт (можно оставить Roboto, но этот ближе к "визитке") -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f4f4f6;
+      --card: rgba(255,255,255,0.92);
+      --text: #0f172a;
+      --muted: #475569;
+      --border: rgba(15, 23, 42, 0.10);
+      --shadow: 0 20px 55px rgba(0,0,0,0.12);
+      --shadow-soft: 0 10px 25px rgba(0,0,0,0.10);
+      --blue: #2563eb;
+      --green: #16a34a;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin:0;
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 700px at 50% 0%, #e9f4ff 0%, var(--bg) 55%, #eef2ff 100%);
+    }
+
+    /* Центровка «визитки» */
+    .page{
+      min-height: 100svh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+    }
+
+    /* Фон (мягкий, в стиле логотипа: холодный) */
+    .page::before{
+      content:"";
+      position: fixed;
+      inset: -40%;
+      background:
+        radial-gradient(700px 500px at 20% 20%, rgba(59,130,246,0.20) 0%, rgba(59,130,246,0) 60%),
+        radial-gradient(700px 500px at 80% 30%, rgba(14,165,233,0.16) 0%, rgba(14,165,233,0) 60%),
+        radial-gradient(700px 500px at 50% 90%, rgba(99,102,241,0.12) 0%, rgba(99,102,241,0) 60%);
+      filter: blur(0px);
+      z-index: -1;
+    }
+
+    .card{
+      width: min(980px, 100%);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transform: translateY(10px);
+      opacity: 0;
+      animation: cardIn 420ms ease-out forwards;
+    }
+    @keyframes cardIn{
+      to{ transform: translateY(0); opacity: 1; }
+    }
+
+    /* Внутренний отступ карточки */
+    .card-inner{
+      padding: 22px 22px 18px;
+    }
+
+    /* Верх: логотип */
+    header{
+      display:flex;
+      justify-content:center;
+      padding: 18px 18px 8px;
+    }
+    .logo{
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: var(--shadow-soft);
+      border: 6px solid rgba(255,255,255,0.9);
+      transform: translateZ(0);
+    }
+
+    .subtitle{
+      margin: 10px auto 14px;
+      max-width: 820px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    /* Услуги — на ПК «визитка»-ряд, на мобилке компактный список */
+    .services{
+      display:flex;
+      flex-wrap: wrap;
+      justify-content:center;
+      gap: 10px 18px; /* вертикаль/горизонталь */
+      margin: 10px 0 14px;
+      padding: 0;
+      list-style: none;
+    }
+    .service{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(2,6,23,0.08);
+      background: rgba(255,255,255,0.7);
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+      user-select:none;
+    }
+    .service:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.95);
+    }
+    .pen{
+      width: 16px;
+      height: 16px;
+      opacity: .75;
+      flex: 0 0 auto;
+    }
+    .service-text{
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    /* Блоки */
+    .section-title{
+      margin: 14px 0 10px;
+      text-align:center;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .btn-row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content:center;
+      margin-bottom: 6px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 10px 14px;
+      border-radius: 12px;
+      text-decoration:none;
+      font-weight: 700;
+      font-size: 13px;
+      border: 1px solid rgba(2,6,23,0.10);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+      will-change: transform;
+    }
+    .btn:active{ transform: scale(0.98); }
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 26px rgba(0,0,0,0.10); }
+
+    .btn-green{ background: linear-gradient(180deg, #22c55e 0%, var(--green) 100%); color: #fff; }
+    .btn-blue{ background: linear-gradient(180deg, #3b82f6 0%, var(--blue) 100%); color: #fff; }
+
+    /* Партнеры компактными кнопками */
+    .partners{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content:center;
+      margin: 0 0 10px;
+    }
+
+    .contact{
+      margin-top: 8px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(2,6,23,0.08);
+      text-align:center;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .contact p{ margin: 6px 0; }
+    .label{ font-weight: 800; color: var(--text); }
+
+    .link{
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 700;
+      border-bottom: 1px dashed rgba(37,99,235,0.45);
+      transition: opacity .16s ease, border-color .16s ease;
+    }
+    .link:hover{
+      opacity: .85;
+      border-color: rgba(37,99,235,0.85);
+    }
+
+    /* ===== МОБИЛЬНАЯ ИДЕАЛЬНАЯ ПЛОТНОСТЬ ===== */
+    @media (max-width: 768px){
+      .page{ padding: 12px; align-items: center; }
+      .card-inner{ padding: 14px 14px 12px; }
+
+      header{ padding: 16px 16px 6px; }
+      .logo{
+        width: min(72vw, 360px);   /* крупнее, чем было */
+        height: min(72vw, 360px);
+        border-width: 5px;
+      }
+
+      .subtitle{
+        font-size: 13px;
+        margin: 8px auto 10px;
+      }
+
+      /* Главное: делаем услуги «как список», плотные */
+      .services{
+        display: block;
+        margin: 6px 0 10px;
+      }
+      .service{
+        width: 100%;
+        justify-content: flex-start;
+        padding: 8px 10px;
+        margin: 6px 0;           /* вот тут контролируем «расстояние» */
+        border-radius: 14px;
+      }
+      .pen{ width: 18px; height: 18px; }
+      .service-text{
+        font-size: 14px;
+        white-space: normal;     /* чтобы длинное переносилось аккуратно */
+      }
+
+      .section-title{ font-size: 16px; margin: 12px 0 8px; }
+      .btn{ width: 100%; max-width: 420px; } /* на мобилке кнопки одной колонкой — красивее */
+      .partners .btn{ width: 100%; max-width: 420px; }
+
+      .contact{
+        font-size: 13px;
+        padding-top: 10px;
+      }
+      .contact p{ margin: 5px 0; }
+      /* Мессенджеры в 1 строку — но если совсем узко, аккуратно сжимается */
+      .messengers-line{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    /* Чуть уважения людям, кто отключил анимации */
+    @media (prefers-reduced-motion: reduce){
+      .card{ animation: none; opacity: 1; transform: none; }
+      .service, .btn{ transition: none; }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <img src="logo.png" alt="ООО Арус">
-        </header>
-        <div class="content">
-            <section class="about">
-                <p>ООО Арус предоставляет широкий спектр бухгалтерских услуг для бизнеса:</p>
-            </section>
-            <section class="services">
-                <div class="service"> 
-               
-                    <p>Регистрация компаний</p>
-                </div>
-                <div class="service">
-                   
-                    <p>Бухгалтерское сопровождение</p>
-                </div>
-                <div class="service">
-   
-                    Восстановление учета
-                </div>
-                <div class="service">
-                
-                    <p>Консультации по налогам</p>
-                   
-                </div>
-                <div class="service">
-                   
-                     <p>Услуги по открытию расчетных счетов</p>
-                </div>
-            </section>
-            <section class="certificates">
-                <h2>Наши сертификаты</h2>
-                <a href="sert_tochka_bank.pdf" download>Скачать сертификат Точки</a>
-                <a href="sert_tbank.pdf" download>Скачать сертификат Т-Банка</a>
-            </section>
-            <section class="links">
-                <h2>Наши партнёры</h2>
-                <a href="https://partner.tochka.com/?referer1=2311379561" target="_blank">Tochka</a>
-                <a href="https://www.tbank.ru/business/rko/form?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank">T-Bank RKO</a>
-                <a href="https://www.tbank.ru/business/acquiring/form/rent?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank">T-Bank Acquiring</a>
-                <a href="https://www.tbank.ru/corporate/payout/salary?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank">T-Bank Salary</a>
-                <a href="https://www.tbank.ru/business/registration-ip/?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank">T-Bank Registration IP</a>
-                <a href="https://www.tbank.ru/business/registration-ooo/form?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank">T-Bank Registration OOO</a>
-                <a href="https://www.tbank.ru/business/special/form?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank">T-Bank Special</a>
-                <a href="https://www.tbank.ru/business/partnership/form/invite-friend/?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank">T-Bank Partnership</a>
-                <a href="https://kontur.ru/?p=w34501" target="_blank">Kontur</a>
-            </section>
-            <section class="contact">
-                <h2>Контакты</h2>
-                <p><span class="bold">Email:</span> aro2025@yandex.ru</p>
-                <p><span class="bold">Телефон:</span> 8 918 144 61 86 (Марина)</p>
-                <p><span class="bold">Мессенджеры:</span> <a href="https://max.ru/u/f9LHodD0cOJlNtCMEsLKJuY6_fljldfUFTGYXLqT8PPhI1Fxme4KttCBdz0" target="_blank">Max</a> | <a href="https://t.me/contact/1767958335:Tu57DPUgV3M12_-z" target="_blank">Telegram</a></p>
-            </section>
+  <div class="page">
+    <div class="card">
+      <header>
+        <!-- как ты просил для будущих коммитов -->
+        <img class="logo" src="logo.png" alt="ООО Арус">
+      </header>
+
+      <div class="card-inner">
+        <p class="subtitle">ООО Арус предоставляет широкий спектр бухгалтерских услуг для бизнеса:</p>
+
+        <!-- УСЛУГИ -->
+        <ul class="services">
+          <li class="service">
+            <img class="pen" src="pen.png" alt="">
+            <p class="service-text">Регистрация компаний</p>
+          </li>
+          <li class="service">
+            <img class="pen" src="pen.png" alt="">
+            <p class="service-text">Бухгалтерское сопровождение</p>
+          </li>
+          <li class="service">
+            <img class="pen" src="pen.png" alt="">
+            <p class="service-text">Восстановление учета</p>
+          </li>
+          <li class="service">
+            <img class="pen" src="pen.png" alt="">
+            <p class="service-text">Консультации по налогам</p>
+          </li>
+          <li class="service">
+            <img class="pen" src="pen.png" alt="">
+            <p class="service-text">Услуги по открытию расчетных счетов</p>
+          </li>
+        </ul>
+
+        <!-- СЕРТИФИКАТЫ -->
+        <div class="section-title">Наши сертификаты</div>
+        <div class="btn-row">
+          <a class="btn btn-green" href="sert_tochka_bank.pdf" download>Скачать сертификат Точки</a>
+          <a class="btn btn-green" href="sert_tbank.pdf" download>Скачать сертификат Т-Банка</a>
         </div>
+
+        <!-- ПАРТНЕРЫ -->
+        <div class="section-title">Наши партнёры</div>
+        <div class="partners">
+          <a class="btn btn-blue" href="https://partner.tochka.com/?referer1=2311379561" target="_blank" rel="noopener">Tochka</a>
+
+          <a class="btn btn-blue" href="https://www.tbank.ru/business/rko/form?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank" rel="noopener">T-Bank: РКО</a>
+
+          <a class="btn btn-blue" href="https://www.tbank.ru/business/acquiring/form/rent?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank" rel="noopener">T-Bank: Эквайринг</a>
+
+          <a class="btn btn-blue" href="https://www.tbank.ru/corporate/payout/salary?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank" rel="noopener">T-Bank: Зарплатный проект</a>
+
+          <a class="btn btn-blue" href="https://www.tbank.ru/business/registration-ip/?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank" rel="noopener">T-Bank: Регистрация ИП</a>
+
+          <a class="btn btn-blue" href="https://www.tbank.ru/business/registration-ooo/form?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank" rel="noopener">T-Bank: Регистрация ООО</a>
+
+          <a class="btn btn-blue" href="https://www.tbank.ru/business/special/form?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank" rel="noopener">T-Bank: Спецпредложение</a>
+
+          <a class="btn btn-blue" href="https://www.tbank.ru/business/partnership/form/invite-friend/?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank" rel="noopener">T-Bank: Партнёрство</a>
+
+          <a class="btn btn-blue" href="https://kontur.ru/?p=w34501" target="_blank" rel="noopener">Контур</a>
+        </div>
+
+        <!-- КОНТАКТЫ -->
+        <div class="section-title">Контакты</div>
+        <div class="contact">
+          <p><span class="label">Email:</span> <a class="link" href="mailto:aro2025@yandex.ru">aro2025@yandex.ru</a></p>
+          <p><span class="label">Телефон:</span> <a class="link" href="tel:+79181446186">8 918 144 61 86</a> (Марина)</p>
+          <p class="messengers-line">
+            <span class="label">Мессенджеры:</span>
+            <a class="link" href="https://max.ru/u/f9LHodD0cOJlNtCMEsLKJuY6_fljldfUFTGYXLqT8PPhI1Fxme4KttCBdz0" target="_blank" rel="noopener">Max</a>
+            |
+            <a class="link" href="https://t.me/contact/1767958335:Tu57DPUgV3M12_-z" target="_blank" rel="noopener">Telegram</a>
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
 </body>
 </html>
