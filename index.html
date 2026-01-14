@@ -256,6 +256,28 @@
       font-size: 13px;
     }
 
+    .cert-actions{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+
+    .cert-open{
+      cursor: pointer;
+      border: 1px solid rgba(2,6,23,0.14);
+      background: rgba(255,255,255,0.9);
+      border-radius: 12px;
+      padding: 6px 10px;
+      font-weight: 800;
+      font-size: 12px;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform .12s ease, box-shadow .12s ease;
+      white-space: nowrap;
+    }
+    .cert-open:hover{ transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.10); }
+    .cert-open:active{ transform: scale(0.98); }
+
     .cert-close{
       cursor: pointer;
       border: 1px solid rgba(2,6,23,0.14);
@@ -265,6 +287,7 @@
       font-weight: 800;
       font-size: 12px;
       transition: transform .12s ease, box-shadow .12s ease;
+      white-space: nowrap;
     }
     .cert-close:hover{ transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.10); }
     .cert-close:active{ transform: scale(0.98); }
@@ -290,6 +313,7 @@
       background: #fff;
     }
 
+    /* ПК: hover показывает попап (как было) */
     @media (hover: hover){
       .cert-wrap:hover .cert-pop{ display: flex; }
     }
@@ -355,6 +379,7 @@
       .card{ animation: none; opacity: 1; transform: none; }
       .service, .btn{ transition: none; }
       .cert-box{ animation: none; }
+      .cert-open, .cert-close{ transition: none; }
     }
   </style>
 </head>
@@ -407,7 +432,11 @@
               <div class="cert-box">
                 <div class="cert-head">
                   <span>Сертификат Точки</span>
-                  <button class="cert-close" type="button" data-close>Закрыть ✕</button>
+                  <div class="cert-actions">
+                    <!-- ПК: по клику откроется в новой вкладке (не скачивается) -->
+                    <a class="cert-open" href="sert_tochka_bank.pdf" target="_blank" rel="noopener">Открыть ↗</a>
+                    <button class="cert-close" type="button" data-close>Закрыть ✕</button>
+                  </div>
                 </div>
 
                 <div class="cert-loading">Подождите, сейчас появится сертификат…</div>
@@ -426,7 +455,10 @@
               <div class="cert-box">
                 <div class="cert-head">
                   <span>Сертификат Т-Банка</span>
-                  <button class="cert-close" type="button" data-close>Закрыть ✕</button>
+                  <div class="cert-actions">
+                    <a class="cert-open" href="sert_tbank.pdf" target="_blank" rel="noopener">Открыть ↗</a>
+                    <button class="cert-close" type="button" data-close>Закрыть ✕</button>
+                  </div>
                 </div>
 
                 <div class="cert-loading">Подождите, сейчас появится сертификат…</div>
@@ -445,7 +477,10 @@
               <div class="cert-box">
                 <div class="cert-head">
                   <span>Сертификат Сбер</span>
-                  <button class="cert-close" type="button" data-close>Закрыть ✕</button>
+                  <div class="cert-actions">
+                    <a class="cert-open" href="sber.pdf" target="_blank" rel="noopener">Открыть ↗</a>
+                    <button class="cert-close" type="button" data-close>Закрыть ✕</button>
+                  </div>
                 </div>
 
                 <div class="cert-loading">Подождите, сейчас появится сертификат…</div>
@@ -519,8 +554,8 @@
       pop.style.display = 'none';
     }
 
+    // На мобилке — оставляем как есть: тап по кнопке открывает/закрывает попап
     if (!canHover) {
-      // На устройствах без hover: открываем по тапу
       document.querySelectorAll('.cert-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
@@ -531,7 +566,6 @@
         });
       });
 
-      // закрытие по затемнению или кнопке
       document.querySelectorAll('.cert-pop').forEach(pop => {
         pop.addEventListener('click', (e) => {
           if (e.target === pop) closePop(pop);
@@ -540,7 +574,16 @@
         if (closeBtn) closeBtn.addEventListener('click', () => closePop(pop));
       });
     } else {
-      // На ПК: крестик/клик по затемнению закрывает
+      // ПК: кликом по кнопке — открываем PDF в новой вкладке (не скачиваем)
+      document.querySelectorAll('.cert-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          // Не мешаем hover-попапу, но кликом открываем отдельную вкладку
+          // (оставляем стандартное поведение ссылки)
+          // Ничего не делаем: браузер сам откроет по href
+        });
+      });
+
+      // ПК: закрытие попапа крестиком/кликом по затемнению (если вдруг открыт через JS)
       document.querySelectorAll('.cert-pop').forEach(pop => {
         const closeBtn = pop.querySelector('[data-close]');
         if (closeBtn) closeBtn.addEventListener('click', () => closePop(pop));
