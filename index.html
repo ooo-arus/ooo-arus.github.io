@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="ru">
 <head>
@@ -5,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ООО Арус</title>
 
-  <!-- Красивый, но строгий шрифт (можно оставить Roboto, но этот ближе к "визитке") -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -32,7 +32,6 @@
       background: radial-gradient(1200px 700px at 50% 0%, #e9f4ff 0%, var(--bg) 55%, #eef2ff 100%);
     }
 
-    /* Центровка «визитки» */
     .page{
       min-height: 100svh;
       display:flex;
@@ -41,7 +40,6 @@
       padding: 18px;
     }
 
-    /* Фон (мягкий, в стиле логотипа: холодный) */
     .page::before{
       content:"";
       position: fixed;
@@ -69,12 +67,10 @@
       to{ transform: translateY(0); opacity: 1; }
     }
 
-    /* Внутренний отступ карточки */
     .card-inner{
       padding: 22px 22px 18px;
     }
 
-    /* Верх: логотип */
     header{
       display:flex;
       justify-content:center;
@@ -99,12 +95,11 @@
       line-height: 1.35;
     }
 
-    /* Услуги — на ПК «визитка»-ряд, на мобилке компактный список */
     .services{
       display:flex;
       flex-wrap: wrap;
       justify-content:center;
-      gap: 10px 18px; /* вертикаль/горизонталь */
+      gap: 10px 18px;
       margin: 10px 0 14px;
       padding: 0;
       list-style: none;
@@ -141,7 +136,6 @@
       white-space: nowrap;
     }
 
-    /* Блоки */
     .section-title{
       margin: 14px 0 10px;
       text-align:center;
@@ -170,6 +164,7 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.08);
       transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
       will-change: transform;
+      cursor: pointer;
     }
     .btn:active{ transform: scale(0.98); }
     .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 26px rgba(0,0,0,0.10); }
@@ -177,7 +172,6 @@
     .btn-green{ background: linear-gradient(180deg, #22c55e 0%, var(--green) 100%); color: #fff; }
     .btn-blue{ background: linear-gradient(180deg, #3b82f6 0%, var(--blue) 100%); color: #fff; }
 
-    /* Партнеры компактными кнопками */
     .partners{
       display:flex;
       flex-wrap: wrap;
@@ -209,6 +203,97 @@
       border-color: rgba(37,99,235,0.85);
     }
 
+    /* ===== Сертификаты: просмотр во всплывающем окне ===== */
+    .cert-wrap{
+      position: relative;
+      display: inline-flex;
+    }
+
+    .cert-pop{
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 50;
+    }
+
+    .cert-pop::before{
+      content:"";
+      position: absolute;
+      inset: 0;
+      background: rgba(2,6,23,0.55);
+      backdrop-filter: blur(2px);
+    }
+
+    .cert-box{
+      position: relative;
+      width: min(920px, 94vw);
+      height: min(80vh, 720px);
+      background: rgba(255,255,255,0.98);
+      border: 1px solid rgba(2,6,23,0.12);
+      border-radius: 18px;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+      overflow: hidden;
+      transform: translateY(6px);
+      opacity: 0;
+      animation: certIn 160ms ease-out forwards;
+    }
+
+    @keyframes certIn{
+      to{ transform: translateY(0); opacity: 1; }
+    }
+
+    .cert-head{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(2,6,23,0.10);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .cert-close{
+      cursor: pointer;
+      border: 1px solid rgba(2,6,23,0.14);
+      background: rgba(255,255,255,0.9);
+      border-radius: 12px;
+      padding: 6px 10px;
+      font-weight: 800;
+      font-size: 12px;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .cert-close:hover{ transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.10); }
+    .cert-close:active{ transform: scale(0.98); }
+
+    .cert-loading{
+      position: absolute;
+      inset: 42px 0 0 0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--muted);
+      font-weight: 700;
+      text-align:center;
+      padding: 18px;
+    }
+
+    .cert-frame{
+      position: absolute;
+      inset: 42px 0 0 0;
+      width: 100%;
+      height: calc(100% - 42px);
+      border: 0;
+      background: #fff;
+    }
+
+    @media (hover: hover){
+      .cert-wrap:hover .cert-pop{ display: flex; }
+    }
+
     /* ===== МОБИЛЬНАЯ ИДЕАЛЬНАЯ ПЛОТНОСТЬ ===== */
     @media (max-width: 768px){
       .page{ padding: 12px; align-items: center; }
@@ -216,7 +301,7 @@
 
       header{ padding: 16px 16px 6px; }
       .logo{
-        width: min(72vw, 360px);   /* крупнее, чем было */
+        width: min(72vw, 360px);
         height: min(72vw, 360px);
         border-width: 5px;
       }
@@ -226,7 +311,6 @@
         margin: 8px auto 10px;
       }
 
-      /* Главное: делаем услуги «как список», плотные */
       .services{
         display: block;
         margin: 6px 0 10px;
@@ -235,17 +319,17 @@
         width: 100%;
         justify-content: flex-start;
         padding: 8px 10px;
-        margin: 6px 0;           /* вот тут контролируем «расстояние» */
+        margin: 6px 0;
         border-radius: 14px;
       }
       .pen{ width: 18px; height: 18px; }
       .service-text{
         font-size: 14px;
-        white-space: normal;     /* чтобы длинное переносилось аккуратно */
+        white-space: normal;
       }
 
       .section-title{ font-size: 16px; margin: 12px 0 8px; }
-      .btn{ width: 100%; max-width: 420px; } /* на мобилке кнопки одной колонкой — красивее */
+      .btn{ width: 100%; max-width: 420px; }
       .partners .btn{ width: 100%; max-width: 420px; }
 
       .contact{
@@ -253,18 +337,24 @@
         padding-top: 10px;
       }
       .contact p{ margin: 5px 0; }
-      /* Мессенджеры в 1 строку — но если совсем узко, аккуратно сжимается */
+
       .messengers-line{
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
+
+      .cert-box{
+        width: min(960px, 96vw);
+        height: min(84vh, 820px);
+        border-radius: 16px;
+      }
     }
 
-    /* Чуть уважения людям, кто отключил анимации */
     @media (prefers-reduced-motion: reduce){
       .card{ animation: none; opacity: 1; transform: none; }
       .service, .btn{ transition: none; }
+      .cert-box{ animation: none; }
     }
   </style>
 </head>
@@ -273,7 +363,6 @@
   <div class="page">
     <div class="card">
       <header>
-        <!-- как ты просил для будущих коммитов -->
         <img class="logo" src="logo.png" alt="ООО Арус">
       </header>
 
@@ -307,14 +396,78 @@
         <!-- СЕРТИФИКАТЫ -->
         <div class="section-title">Наши сертификаты</div>
         <div class="btn-row">
-          <a class="btn btn-green" href="sert_tochka_bank.pdf" download>Скачать сертификат Точки</a>
-          <a class="btn btn-green" href="sert_tbank.pdf" download>Скачать сертификат Т-Банка</a>
+
+          <!-- Точка -->
+          <div class="cert-wrap">
+            <a class="btn btn-green cert-btn" href="sert_tochka_bank.pdf" data-cert="cert-tochka" aria-haspopup="dialog">
+              Посмотреть сертификат Точки
+            </a>
+
+            <div class="cert-pop" id="cert-tochka" role="dialog" aria-modal="true" aria-label="Сертификат Точки">
+              <div class="cert-box">
+                <div class="cert-head">
+                  <span>Сертификат Точки</span>
+                  <button class="cert-close" type="button" data-close>Закрыть ✕</button>
+                </div>
+
+                <div class="cert-loading">Подождите, сейчас появится сертификат…</div>
+                <iframe class="cert-frame" src="sert_tochka_bank.pdf" loading="eager"></iframe>
+              </div>
+            </div>
+          </div>
+
+          <!-- Т-Банк -->
+          <div class="cert-wrap">
+            <a class="btn btn-green cert-btn" href="sert_tbank.pdf" data-cert="cert-tbank" aria-haspopup="dialog">
+              Посмотреть сертификат Т-Банка
+            </a>
+
+            <div class="cert-pop" id="cert-tbank" role="dialog" aria-modal="true" aria-label="Сертификат Т-Банка">
+              <div class="cert-box">
+                <div class="cert-head">
+                  <span>Сертификат Т-Банка</span>
+                  <button class="cert-close" type="button" data-close>Закрыть ✕</button>
+                </div>
+
+                <div class="cert-loading">Подождите, сейчас появится сертификат…</div>
+                <iframe class="cert-frame" src="sert_tbank.pdf" loading="eager"></iframe>
+              </div>
+            </div>
+          </div>
+
+          <!-- Сбер -->
+          <div class="cert-wrap">
+            <a class="btn btn-green cert-btn" href="sber.pdf" data-cert="cert-sber" aria-haspopup="dialog">
+              Посмотреть сертификат Сбер
+            </a>
+
+            <div class="cert-pop" id="cert-sber" role="dialog" aria-modal="true" aria-label="Сертификат Сбер">
+              <div class="cert-box">
+                <div class="cert-head">
+                  <span>Сертификат Сбер</span>
+                  <button class="cert-close" type="button" data-close>Закрыть ✕</button>
+                </div>
+
+                <div class="cert-loading">Подождите, сейчас появится сертификат…</div>
+                <iframe class="cert-frame" src="sber.pdf" loading="eager"></iframe>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <!-- ПАРТНЕРЫ -->
         <div class="section-title">Наши партнёры</div>
         <div class="partners">
           <a class="btn btn-blue" href="https://partner.tochka.com/?referer1=2311379561" target="_blank" rel="noopener">Tochka</a>
+
+          <a class="btn btn-blue" href="https://partners.dasreda.ru/landing/self-employed?partnerID=51a7e0d8c8b6a43ef0ee&erid=2RanynAMpzk" target="_blank" rel="noopener">
+            Деловая среда: Самозанятые
+          </a>
+
+          <a class="btn btn-blue" href="https://partners.dasreda.ru/landing/acquiring?partnerID=4ee1b4f05a5cbf9a4cb5&erid=2RanynPhiXr" target="_blank" rel="noopener">
+            Деловая среда: Эквайринг
+          </a>
 
           <a class="btn btn-blue" href="https://www.tbank.ru/business/rko/form?utm_medium=ptr.act&utm_campaign=sme.partners&partnerId=8-1001J8MW8&agentId=5-O9THG4EX&agentSsoId=ac5bf1c5-9c8c-4883-924a-bdf531933af2&utm_source=partner_rko_a_sme" target="_blank" rel="noopener">T-Bank: РКО</a>
 
@@ -348,5 +501,55 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Лоадер: скрываем "Подождите..." когда PDF загрузился
+    document.querySelectorAll('.cert-pop').forEach(pop => {
+      const frame = pop.querySelector('iframe');
+      const loading = pop.querySelector('.cert-loading');
+      if (frame && loading) {
+        frame.addEventListener('load', () => { loading.style.display = 'none'; }, { once: true });
+      }
+    });
+
+    const canHover = window.matchMedia('(hover: hover)').matches;
+
+    function closePop(pop){
+      if (!pop) return;
+      pop.style.display = 'none';
+    }
+
+    if (!canHover) {
+      // На устройствах без hover: открываем по тапу
+      document.querySelectorAll('.cert-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const id = btn.getAttribute('data-cert');
+          const pop = document.getElementById(id);
+          if (!pop) return;
+          pop.style.display = (pop.style.display === 'flex') ? 'none' : 'flex';
+        });
+      });
+
+      // закрытие по затемнению или кнопке
+      document.querySelectorAll('.cert-pop').forEach(pop => {
+        pop.addEventListener('click', (e) => {
+          if (e.target === pop) closePop(pop);
+        });
+        const closeBtn = pop.querySelector('[data-close]');
+        if (closeBtn) closeBtn.addEventListener('click', () => closePop(pop));
+      });
+    } else {
+      // На ПК: крестик/клик по затемнению закрывает
+      document.querySelectorAll('.cert-pop').forEach(pop => {
+        const closeBtn = pop.querySelector('[data-close]');
+        if (closeBtn) closeBtn.addEventListener('click', () => closePop(pop));
+        pop.addEventListener('click', (e) => {
+          if (e.target === pop) closePop(pop);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
+```
